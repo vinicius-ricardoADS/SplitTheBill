@@ -4,4 +4,6 @@
     <string name="edit_member">Edit Member</string>
     <string name="remove_member">Remove Member</string>
     <string name="detail_member">Detail Member</string>
+    <string name="tile_name">Name</string>
+    <string name="amount_paid">Amount paid</string>
 </resources>
