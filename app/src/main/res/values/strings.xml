@@ -6,4 +6,7 @@
     <string name="detail_member">Detail Member</string>
     <string name="tile_name">Name</string>
     <string name="amount_paid">Amount paid</string>
+    <string name="items">Items</string>
+    <string name="btn_save">save</string>
+    <string name="linear_layout_items">Items</string>
 </resources>
