@@ -1,7 +1,8 @@
-package br.edu.ifsp.ads.splitthebill
+package br.edu.ifsp.ads.splitthebill.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import br.edu.ifsp.ads.splitthebill.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
