@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">SplitTheBill</string>
-    <string name="add_member">Adicionar Membro</string>
+    <string name="add_member">Added Member</string>
+    <string name="edit_member">Edit Member</string>
+    <string name="remove_member">Remove Member</string>
+    <string name="detail_member">Detail Member</string>
 </resources>
