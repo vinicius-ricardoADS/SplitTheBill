@@ -13,7 +13,7 @@
         android:textSize="25sp" />
 
     <TextView
-        android:id="@+id/emailTv"
+        android:id="@+id/amoutTv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/amount_paid" />

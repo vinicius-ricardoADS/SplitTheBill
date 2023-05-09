@@ -1,5 +1,6 @@
 package br.edu.ifsp.ads.splitthebill.adapter
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +11,17 @@ import br.edu.ifsp.ads.splitthebill.R
 import br.edu.ifsp.ads.splitthebill.databinding.TileMemberBinding
 import br.edu.ifsp.ads.splitthebill.model.Member
 
-class MemberAdapter (context: Context, private val memberList: MutableList<Member>
+class PaidPersonAdapter (context: Context, private val memberList: MutableList<Member>
 ): ArrayAdapter<Member> (context, R.layout.tile_member, memberList) {
 
     private lateinit var tcb: TileMemberBinding
 
+    private val total = memberList
+        .map { member -> member.amountPaid }
+        .reduce { a, b -> a + b }
+    private val maxPayMember = total / memberList.size.toDouble()
+
+    @SuppressLint("SetTextI18n")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val member: Member = memberList[position]
 
@@ -35,9 +42,15 @@ class MemberAdapter (context: Context, private val memberList: MutableList<Membe
 
             tileMemberView.tag = tcvh
         }
-
-        (tileMemberView.tag as TileMemberViewHolder).nameTv.text = member.name
-        (tileMemberView.tag as TileMemberViewHolder).amoutPaid.text = member.amountPaid.toString()
+        val mustReceive = member.amountPaid - maxPayMember
+        if (member.amountPaid > maxPayMember) {
+            (tileMemberView.tag as TileMemberViewHolder).nameTv.text = member.name
+            (tileMemberView.tag as TileMemberViewHolder).amoutPaid.text = "Must receive ${String.format("%.2f", mustReceive)}"
+        }
+        if (member.amountPaid < maxPayMember) {
+            (tileMemberView.tag as TileMemberViewHolder).nameTv.text = member.name
+            (tileMemberView.tag as TileMemberViewHolder).amoutPaid.text = "Must pay: ${String.format("%.2f", maxPayMember - member.amountPaid)}"
+        }
 
         return tileMemberView
     }

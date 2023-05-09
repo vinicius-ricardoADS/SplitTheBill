@@ -1,5 +1,6 @@
 package br.edu.ifsp.ads.splitthebill.view
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -8,11 +9,14 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
+import android.widget.ListView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import br.edu.ifsp.ads.splitthebill.R
 import br.edu.ifsp.ads.splitthebill.adapter.MemberAdapter
+import br.edu.ifsp.ads.splitthebill.adapter.PaidPersonAdapter
 import br.edu.ifsp.ads.splitthebill.controller.MemberController
 import br.edu.ifsp.ads.splitthebill.databinding.ActivityMainBinding
 import br.edu.ifsp.ads.splitthebill.model.Member
@@ -28,6 +32,10 @@ class MainActivity : BasicActivity() {
 
     private val memberAdapter: MemberAdapter by lazy {
         MemberAdapter (this, memberList)
+    }
+
+    private val paidPersonAdapter: PaidPersonAdapter by lazy {
+        PaidPersonAdapter (this, memberList)
     }
 
     private lateinit var parl: ActivityResultLauncher<Intent>
@@ -89,7 +97,16 @@ class MainActivity : BasicActivity() {
                 true
             }
             R.id.calculate -> {
-                parl.launch(Intent(this, CalculateInDebtActivity::class.java))
+                val view: View = layoutInflater.inflate(R.layout.activity_calculate_in_debt, null)
+                val dialog = BottomSheetDialog(this)
+                dialog.setContentView(view)
+                val listView = view.findViewById<ListView>(R.id.calculateDebtMembers)
+                val total = memberList
+                    .map { member -> member.amountPaid }
+                    .reduce { a, b -> a + b }
+                supportActionBar?.subtitle = "Totality: R$ ${String.format("%.2f", total)}"
+                listView.adapter = paidPersonAdapter
+                dialog.show()
                 true
             }
             else -> false
@@ -131,5 +148,6 @@ class MainActivity : BasicActivity() {
         memberList.clear()
         memberList.addAll(_memberList)
         memberAdapter.notifyDataSetChanged()
+        paidPersonAdapter.notifyDataSetChanged()
     }
 }
