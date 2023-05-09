@@ -6,7 +6,7 @@ import androidx.room.*
 interface MembersDao {
 
     @Insert
-    fun createMember (member: Member): Member?
+    fun createMember (member: Member)
 
     @Query ("SELECT * FROM Member")
     fun retrieveMembers (): MutableList<Member>

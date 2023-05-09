@@ -9,4 +9,6 @@
     <string name="items">Items</string>
     <string name="btn_save">save</string>
     <string name="linear_layout_items">Items</string>
+    <string name="value_full">Value Full</string>
+    <string name="value">Value</string>
 </resources>

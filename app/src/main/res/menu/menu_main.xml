@@ -7,4 +7,10 @@
         android:icon="@drawable/ic_add_member_foreground"
         android:title="@string/add_member"
         app:showAsAction="ifRoom"/>
+
+    <item
+        android:id="@+id/calculate"
+        android:icon="@drawable/ic_action_calculate"
+        android:title="@string/add_member"
+        app:showAsAction="ifRoom"/>
 </menu>
