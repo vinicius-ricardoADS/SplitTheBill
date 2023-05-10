@@ -73,6 +73,7 @@ class MainActivity : BasicActivity() {
                         }
                     }
                     memberAdapter.notifyDataSetChanged()
+                    paidPersonAdapter.notifyDataSetChanged()
                 }
             }
         }
@@ -129,6 +130,7 @@ class MainActivity : BasicActivity() {
                 memberList.removeAt(position)
                 memberController.removeMember(member)
                 memberAdapter.notifyDataSetChanged()
+                paidPersonAdapter.notifyDataSetChanged()
                 Toast.makeText(this, "Contato removido!", Toast.LENGTH_SHORT).show()
                 true
             }

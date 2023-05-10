@@ -16,14 +16,24 @@ class PaidPersonAdapter (context: Context, private val memberList: MutableList<M
 
     private lateinit var tcb: TileMemberBinding
 
-    private val total = memberList
-        .map { member -> member.amountPaid }
-        .reduce { a, b -> a + b }
-    private val maxPayMember = total / memberList.size.toDouble()
+
+
 
     @SuppressLint("SetTextI18n")
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
         val member: Member = memberList[position]
+
+        var total = 0.0
+
+        if (memberList.size > 0) {
+             total = memberList
+                .map { m -> m.amountPaid }
+                .reduce { a, b -> a + b }
+        }
+
+        val maxPayMember = total / memberList.size.toDouble()
+
+
 
         var tileMemberView = convertView
 
