@@ -61,6 +61,10 @@ class PaidPersonAdapter (context: Context, private val memberList: MutableList<M
             (tileMemberView.tag as TileMemberViewHolder).nameTv.text = member.name
             (tileMemberView.tag as TileMemberViewHolder).amoutPaid.text = "Must pay: ${String.format("%.2f", maxPayMember - member.amountPaid)}"
         }
+        if (member.amountPaid == maxPayMember) {
+            (tileMemberView.tag as TileMemberViewHolder).nameTv.text = member.name
+            (tileMemberView.tag as TileMemberViewHolder).amoutPaid.text = "Owes nothing"
+        }
 
         return tileMemberView
     }

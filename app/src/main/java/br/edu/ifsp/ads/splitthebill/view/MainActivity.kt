@@ -102,7 +102,9 @@ class MainActivity : BasicActivity() {
                 val dialog = BottomSheetDialog(this)
                 dialog.setContentView(view)
                 val listView = view.findViewById<ListView>(R.id.calculateDebtMembers)
-                val total = memberList
+                var total = 0.0
+                if (memberList.size > 0)
+                    total = memberList
                     .map { member -> member.amountPaid }
                     .reduce { a, b -> a + b }
                 supportActionBar?.subtitle = "Totality: R$ ${String.format("%.2f", total)}"
